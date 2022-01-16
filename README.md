@@ -71,7 +71,7 @@ Then, we construct our portfolio's weights by calculating the weights for each s
 Now we can calculate the close returns for all stock and dates from the price data.
 > Note: we are implementing returns and not log returns since we deal with volatility, so we do not have to use log returns.
 
-![Close Returns](/images/close_returns.png)
+![Close Returns](/images/CloseReturns.png)
 
 With the returns of each stock computed, we can compute the returns for both the index and ETF.
 
@@ -86,9 +86,11 @@ To compare the ETF and Index performance, we can calculate the tracking error. H
 <a id='tracking_error'></a>
 #### Tracking Error
 
-Now that we have everything to check the performance of the smart beta portfolio, we can calculate the annualised tracking error against the index. For reference, we use the following annualised tracking error function:  
-![Annualized Tracking Error Function](/images/atef.png | width=200)
-Where _r<sub>p</sub>_ denotes the portfolio/ETF returns, and _r<sub>b</sub>_ is the benchmark returns.
+Now that we have everything to check the performance of the smart beta portfolio, we can calculate the annualised tracking error against the index. For reference, we use the following annualised tracking error function:
+
+<img src="/images/atef.png" width="300">
+
+where _r<sub>p</sub>_ denotes the portfolio/ETF returns, and _r<sub>b</sub>_ is the benchmark returns.
 > Note: When calculating the sample standard deviation, the delta degrees of freedom is 1 (which is also the default value).
 
 ***Hence, the annualised tracking error for our Smart Beta is 0.102.***
@@ -99,7 +101,9 @@ Where _r<sub>p</sub>_ denotes the portfolio/ETF returns, and _r<sub>b</sub>_ is 
 Now, let us create a second portfolio. Although we reuse the market cap weighted index, this one will be independent of the dividend-weighted portfolio we created in [Part 1](#first_part).
 
 On the one hand, we would like to minimise the portfolio's variance, and on the other hand, we also aim to closely track a market cap weighted index. In other words, we try to minimise the distance between the weights of our portfolio and the weights of the index.
-![Portfolio Problem](/images/portfolio_problem.png | width=300)
+
+<img src="/images/portfolio_problem.png" width="400">
+
 where _m_ is the number of stocks in the portfolio, and 𝜆 is a scaling factor to be chosen.
 
 Why are we doing this? One way that investors evaluate a fund is by how well it tracks its index. The fund is still expected to deviate from the index within a certain range in order to improve fund performance. A way for a fund to track the performance of its benchmark is by keeping its asset weights similar to the weights of the index. We would expect that if the fund has the same stocks as the benchmark and the same weights for each stock as the benchmark, the fund will yield about the same returns as the benchmark. By minimising a linear combination of both the portfolio risk and distance between portfolio and benchmark weights, we attempt to balance the desire to minimise portfolio variance to track the index.
